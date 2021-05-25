@@ -1,15 +1,4 @@
-import {
-  Pane,
-  majorScale,
-  Heading,
-  TextInput,
-  IconButton,
-  PlusIcon,
-  Card,
-  Checkbox,
-  CrossIcon,
-  toaster,
-} from "evergreen-ui";
+import { Pane, majorScale, Heading, IconButton, Checkbox, CrossIcon } from "evergreen-ui";
 
 type LightProps = {
   toDoList: Array<{
@@ -23,21 +12,19 @@ type LightProps = {
 
 const Light = ({ toDoList, handleDeleteTodo, handleCheck }: LightProps) => {
   return (
-    <Pane height='100vh' width='100%' background='gray50' padding={majorScale(4)}>
+    <Pane flex='1' background='gray50' padding={majorScale(4)}>
       <div
         style={{
           color: "#101840",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
           maxWidth: "400px",
-          overflowY: "auto",
           margin: "auto",
           textAlign: "center",
         }}
       >
         <Heading paddingTop={majorScale(8)} size={900}>
-          To Do
+          To Do {toDoList.length ? `: ${toDoList.length}` : null}
         </Heading>
         {toDoList.length
           ? toDoList
@@ -55,7 +42,7 @@ const Light = ({ toDoList, handleDeleteTodo, handleCheck }: LightProps) => {
                       <Heading
                         marginY='auto'
                         overflow='hidden'
-                        width='300px'
+                        max-width='300px'
                         style={{
                           textDecoration: item.isChecked ? "line-through" : "none",
                           textOverflow: "ellipsis",
@@ -65,7 +52,12 @@ const Light = ({ toDoList, handleDeleteTodo, handleCheck }: LightProps) => {
                         {item.value}
                       </Heading>
                     </div>
-                    <IconButton icon={CrossIcon} onClick={() => handleDeleteTodo(item.key)} marginY='auto' />
+                    <IconButton
+                      icon={CrossIcon}
+                      borderRadius='50%'
+                      onClick={() => handleDeleteTodo(item.key)}
+                      marginY='auto'
+                    />
                   </Pane>
                 );
               })
